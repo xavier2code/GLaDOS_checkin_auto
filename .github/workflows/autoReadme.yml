@@ -1,4 +1,4 @@
-name: Update README
+name: 每日自懂更新README
 
 on:
   schedule:

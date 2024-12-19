@@ -1,4 +1,4 @@
-name: 每日自懂更新README
+name: 自动更新README
 
 on:
   schedule:

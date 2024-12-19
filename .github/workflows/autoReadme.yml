@@ -1,0 +1,36 @@
+name: Update README
+
+on:
+  schedule:
+    - cron: '0 3 * * *'  # 每天凌晨3点触发
+  push:
+    branches:
+      - main  # 或者你的默认分支
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run your script or command
+        id: run_command
+        run: |
+          # 在这里运行你的命令并将结果输出到一个文件
+          echo "This is the result of the action" > result.txt
+
+      - name: Update README
+        run: |
+          # 将结果写入 README 文件
+          echo "## Action Result" >> README.md
+          cat result.txt >> README.md
+          # 提交更改
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add README.md
+          git commit -m "Update README with action result"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
